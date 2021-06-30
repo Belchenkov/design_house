@@ -21,7 +21,7 @@ class LoginController extends Controller
                 "errors" => [
                     "credentials" => "Invalid credentials!"
                 ]
-            ]);
+            ], 401);
         }
 
         $user = $this->guard()->user();
@@ -31,10 +31,19 @@ class LoginController extends Controller
                 "errors" => [
                     "verification" => "You need to verify your email account!"
                 ]
-            ]);
+            ], 401);
         }
 
         return $this->sendLoginResponse($request);
+    }
+
+    public function logout()
+    {
+        $this->guard()->logout();
+
+        return response()->json([
+            'message' => 'Logout successfully!'
+        ]);
     }
 
     protected function sendLoginResponse(Request $request)
@@ -62,7 +71,7 @@ class LoginController extends Controller
                 "errors" => [
                     "verification" => "You need to verify your email account!"
                 ]
-            ]);
+            ], 401);
         }
 
         throw ValidationException::withMessages([

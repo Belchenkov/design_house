@@ -11,7 +11,7 @@ Route::get('/', function() {
 
 // Routes for auth users
 Route::group(['middleware' => ['auth:api']], function () {
-
+    Route::post('logout', 'Auth\LoginController@logout');
 });
 
 // Routes for guest users
