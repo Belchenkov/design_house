@@ -9,6 +9,8 @@ Route::get('/', function() {
     ], 200);
 });
 
+Route::get('me', 'User\MeController@me');
+
 // Routes for auth users
 Route::group(['middleware' => ['auth:api']], function () {
     Route::post('logout', 'Auth\LoginController@logout');
