@@ -84,4 +84,8 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         $this->notify(new ResetPassword($token));
     }
 
+    public function designs(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Design::class);
+    }
 }
