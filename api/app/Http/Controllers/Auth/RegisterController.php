@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use App\Repositories\Contracts\IUser;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -12,27 +13,13 @@ use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
-
     use RegistersUsers;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    protected IUser $users;
+
+    public function __construct(IUser $users)
     {
-        $this->middleware('guest');
+        $this->users = $users;
     }
 
     protected function validator(array $data)
@@ -53,7 +40,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data): User
     {
-        return User::create([
+        return $this->users->create([
             'username' => $data['name'],
             'name' => $data['name'],
             'email' => $data['email'],

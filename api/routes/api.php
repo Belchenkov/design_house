@@ -12,6 +12,7 @@ Route::get('me', 'User\MeController@me');
 
 // Get Designs
 Route::get('designs', 'Designs\DesignController@index');
+Route::get('designs/{id}', 'Designs\DesignController@findDesign');
 
 // Get Users
 Route::get('users', 'User\UserController@index');
