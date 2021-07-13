@@ -19,4 +19,5 @@ class DesignRepository extends BaseRepository implements IDesign
         $design = $this->find($id);
         $design->retag($data);
     }
+
 }
