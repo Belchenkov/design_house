@@ -63,6 +63,13 @@ class Handler extends ExceptionHandler
             ]], Response::HTTP_NOT_FOUND);
         }
 
+        if ($exception instanceof ModelNotDefined && $request->expectsJson()) {
+            return response()->json([
+                'errors' => [
+                    'message' => 'No model defined'
+            ]], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+
         return parent::render($request, $exception);
     }
 }

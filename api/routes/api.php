@@ -8,8 +8,14 @@ Route::get('/', function() {
         'message' => 'DesignHouse API...'
     ], 200);
 });
-
 Route::get('me', 'User\MeController@me');
+
+// Get Designs
+Route::get('designs', 'Designs\DesignController@index');
+Route::get('designs/{id}', 'Designs\DesignController@findDesign');
+
+// Get Users
+Route::get('users', 'User\UserController@index');
 
 // Routes for auth users
 Route::group(['middleware' => ['auth:api']], function () {
