@@ -6,12 +6,11 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\User;
 use App\Repositories\Contracts\IUser;
-use Illuminate\Support\Collection;
 
-class UserRepository implements IUser
+class UserRepository extends BaseRepository implements IUser
 {
-    public function all(): Collection
+    public function model(): string
     {
-        return User::all();
+        return User::class;
     }
 }

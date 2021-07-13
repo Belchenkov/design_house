@@ -6,12 +6,11 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\Design;
 use App\Repositories\Contracts\IDesign;
-use Illuminate\Support\Collection;
 
-class DesignRepository implements IDesign
+class DesignRepository extends BaseRepository implements IDesign
 {
-    public function all(): Collection
+    public function model(): string
     {
-        return Design::all();
+        return Design::class;
     }
 }
