@@ -7,6 +7,7 @@ use App\Http\Resources\CommentResource;
 use App\Repositories\Contracts\IComment;
 use App\Repositories\Contracts\IDesign;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class CommentController extends Controller
 {
@@ -31,5 +32,34 @@ class CommentController extends Controller
         ]);
 
         return new CommentResource($comment);
+    }
+
+    public function update(Request $request, int $id)
+    {
+        $comment = $this->comments->find($id);
+        $this->authorize('update', $comment);
+
+        $this->validate($request, [
+           'body' => ['required']
+        ]);
+
+        $comment = $this->comments->update($id, [
+            'body' => $request->body
+        ]);
+
+
+        return new CommentResource($comment);
+    }
+
+    public function destroy(int $id)
+    {
+        $comment = $this->comments->find($id);
+        $this->authorize('delete', $comment);
+
+        $this->comments->delete($id);
+
+        return response()->json([
+            'message' => 'Comment Deleted!'
+        ], Response::HTTP_NO_CONTENT);
     }
 }
