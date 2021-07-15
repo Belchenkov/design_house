@@ -14,7 +14,7 @@ class Comment extends Model
 
     public function user(): BelongsTo
     {
-        $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function commentable()

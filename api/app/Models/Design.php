@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Facades\Storage;
 
 class Design extends Model
@@ -22,18 +24,18 @@ class Design extends Model
         'disk'
     ];
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function comments()
+    public function comments(): MorphMany
     {
         return $this->morphMany(Comment::class, 'commentable')
             ->orderBy('created_at');
     }
 
-    public function getImagesAttribute()
+    public function getImagesAttribute(): array
     {
         return [
             'thumbnail' => $this->getImagePath('thumbnail'),
@@ -42,7 +44,7 @@ class Design extends Model
         ];
     }
 
-    protected function getImagePath($size)
+    protected function getImagePath($size): string
     {
         return Storage::disk($this->disk)
             ->url('uploads/designs/' . $size . '/' . $this->image);

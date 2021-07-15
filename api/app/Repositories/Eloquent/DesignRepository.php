@@ -4,6 +4,7 @@
 namespace App\Repositories\Eloquent;
 
 
+use App\Models\Comment;
 use App\Models\Design;
 use App\Repositories\Contracts\IDesign;
 
@@ -20,4 +21,12 @@ class DesignRepository extends BaseRepository implements IDesign
         $design->retag($data);
     }
 
+    public function addComment(int $design_id, array $data): Comment
+    {
+        // get the design for which we want to create a comment
+        $design = $this->find($design_id);
+
+        // create the comment for the design
+        return $design->comments()->create($data);
+    }
 }
