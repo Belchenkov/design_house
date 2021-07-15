@@ -16,8 +16,12 @@ class DesignResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'comments' => CommentResource::collection($this->comments),
-            'user' => new UserResource($this->user),
+            'comments' => CommentResource::collection(
+                $this->whenLoaded('comments')
+            ),
+            'user' => new UserResource(
+                $this->whenLoaded('user')
+            ),
             'title' => $this->title,
             'slug' => $this->slug,
             'is_live' => $this->is_live,
