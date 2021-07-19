@@ -2,15 +2,30 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Likeable;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * Class Design
+ * @package App\Models
+ * @property int user_id
+ * @property string image
+ * @property string title
+ * @property string description
+ * @property string slug
+ * @property bool close_to_comment
+ * @property bool is_live
+ * @property bool upload_successful
+ * @property string disk
+ * @property Likeable likes
+ */
 class Design extends Model
 {
-    use Taggable;
+    use Taggable, Likeable;
 
     protected $fillable = [
         'user_id',
