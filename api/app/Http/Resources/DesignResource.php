@@ -4,6 +4,10 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * Class DesignResource
+ * @package App\Http\Resources
+ */
 class DesignResource extends JsonResource
 {
     /**
@@ -12,14 +16,20 @@ class DesignResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public function toArray($request)
+    public function toArray($request): array
     {
         return [
             'id' => $this->id,
-            'user' => new UserResource($this->user),
+            'comments' => CommentResource::collection(
+                $this->whenLoaded('comments')
+            ),
+            'user' => new UserResource(
+                $this->whenLoaded('user')
+            ),
             'title' => $this->title,
             'slug' => $this->slug,
             'is_live' => $this->is_live,
+            'likes_count' => $this->likes()->count(),
             'images' => $this->images,
             'description' => $this->description,
             'tag_list' => [

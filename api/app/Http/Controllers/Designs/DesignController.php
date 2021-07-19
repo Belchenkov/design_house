@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Designs;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\DesignResource;
-use App\Models\Design;
 use App\Repositories\Contracts\IDesign;
+use App\Repositories\Eloquent\Criteria\EagerLoad;
 use App\Repositories\Eloquent\Criteria\ForUser;
 use App\Repositories\Eloquent\Criteria\IsLive;
 use App\Repositories\Eloquent\Criteria\LatestFirst;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -28,7 +28,8 @@ class DesignController extends Controller
         $designs = $this->designs->withCriteria([
             new LatestFirst(),
             new IsLive(),
-            new ForUser(auth()->id())
+            new ForUser(auth()->id()),
+            new EagerLoad(['user', 'comments'])
         ])->all();
 
         return DesignResource::collection($designs);
@@ -85,11 +86,30 @@ class DesignController extends Controller
             }
         }
 
-        $this->designs->delete();
+        $this->designs->delete($id);
 
         return response()->json([
             'status' => true,
-            'message' => 'Image was deleted successful'
+            'message' => 'Record deleted!'
+        ]);
+    }
+
+    public function like(int $id): JsonResponse
+    {
+        $this->designs->like($id);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Successful'
+        ]);
+    }
+
+    public function checkIfUserHasLiked(int $design_id): JsonResponse
+    {
+        $isLiked = $this->designs->isLikedByUser($design_id);
+        return response()->json([
+            'status' => true,
+            'liked' => $isLiked
         ]);
     }
 }

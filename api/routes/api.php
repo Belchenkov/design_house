@@ -10,9 +10,6 @@ Route::get('/', function() {
 });
 Route::get('me', 'User\MeController@me');
 
-// Get Designs
-Route::get('designs', 'Designs\DesignController@index');
-Route::get('designs/{id}', 'Designs\DesignController@findDesign');
 
 // Get Users
 Route::get('users', 'User\UserController@index');
@@ -25,10 +22,22 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::put('settings/profile', 'User\SettingsController@updateProfile');
     Route::put('settings/password', 'User\SettingsController@updatePassword');
 
-    // Upload Designs
+    // Designs
+    Route::get('designs', 'Designs\DesignController@index');
+    Route::get('designs/{id}', 'Designs\DesignController@findDesign');
     Route::post('designs', 'Designs\UploadController@upload');
     Route::put('designs/{id}', 'Designs\DesignController@update');
     Route::delete('designs/{id}', 'Designs\DesignController@destroy');
+
+    // Comments
+    Route::post('designs/{id}/comments', 'Designs\CommentController@store');
+    Route::put('comments/{id}', 'Designs\CommentController@update');
+    Route::delete('comments/{id}', 'Designs\CommentController@destroy');
+
+    // Likes
+    Route::post('designs/{id}/like', 'Designs\DesignController@like');
+    Route::get('designs/{id}/liked', 'Designs\DesignController@checkIfUserHasLiked');
+
 });
 
 // Routes for guest users
