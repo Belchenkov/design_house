@@ -103,4 +103,13 @@ class DesignController extends Controller
             'message' => 'Successful'
         ]);
     }
+
+    public function checkIfUserHasLiked(int $design_id): JsonResponse
+    {
+        $isLiked = $this->designs->isLikedByUser($design_id);
+        return response()->json([
+            'status' => true,
+            'liked' => $isLiked
+        ]);
+    }
 }
