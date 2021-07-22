@@ -1,6 +1,6 @@
 <?php
 
-namespace App\MOdels;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class Team
- * @package App\MOdels
+ * @package App\Models
  * @property int id
  */
 class Team extends Model
