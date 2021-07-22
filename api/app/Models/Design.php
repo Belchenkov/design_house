@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Storage;
  * @property string title
  * @property string description
  * @property string slug
+ * @property int team_id
  * @property bool close_to_comment
  * @property bool is_live
  * @property bool upload_successful
@@ -33,6 +34,7 @@ class Design extends Model
         'title',
         'description',
         'slug',
+        'team_id',
         'close_to_comment',
         'is_live',
         'upload_successful',
@@ -42,6 +44,11 @@ class Design extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function team(): BelongsTo
+    {
+        return $this->belongsTo(Team::class);
     }
 
     public function comments(): MorphMany

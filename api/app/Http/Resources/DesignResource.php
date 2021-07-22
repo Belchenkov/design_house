@@ -28,6 +28,10 @@ class DesignResource extends JsonResource
             ),
             'title' => $this->title,
             'slug' => $this->slug,
+            'team' => $this->team ? [
+                'name' => $this->team->name,
+                'slug' => $this->team->slug
+            ] : null,
             'is_live' => $this->is_live,
             'likes_count' => $this->likes()->count(),
             'images' => $this->images,
