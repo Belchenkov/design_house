@@ -67,7 +67,7 @@ class Team extends Model
             ->count();
     }
 
-    public function hasUser(User $user): bool
+    public function hasUser($user): bool
     {
         return (bool)$this->members()
             ->where('user_id', $user->id)

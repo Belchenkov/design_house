@@ -20,8 +20,8 @@ class InvitationsController extends Controller
     protected IUser $users;
 
     public function __construct(
-        IInvitation $invitations,
         ITeam $teams,
+        IInvitation $invitations,
         IUser $users
     )
     {
@@ -72,7 +72,6 @@ class InvitationsController extends Controller
                 'message' => 'This user seems to be a team member already'
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
-
         // Send the invitation to the user
         $this->createInvitation(true, $team, $request->email);
 
