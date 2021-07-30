@@ -81,6 +81,34 @@ class InvitationsController extends Controller
     }
 
     /**
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function resend(int $id): JsonResponse
+    {
+        if (! $invitation = $this->invitations->find($id)) {
+            return response()->json([
+                'message' => 'Invitation is not found!'
+            ], Response::HTTP_NOT_FOUND);
+        }
+
+        if (auth()->user() && ! auth()->user()->isOwnerOfTeam($invitation->team)) {
+            return response()->json([
+                'email' => 'You are not the team owner!'
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        $recipient = $this->users->findByEmail($invitation->recipient_email);
+
+        Mail::to($invitation->recipient_email)
+            ->send(new SendInvitationToJoinTeam($invitation, !is_null($recipient)));
+
+        return response()->json([
+            'message' => 'Invitation resent'
+        ], Response::HTTP_OK);
+    }
+
+    /**
      * @param bool $user_exists
      * @param Team $team
      * @param string $email
