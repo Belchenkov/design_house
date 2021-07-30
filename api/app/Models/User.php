@@ -6,11 +6,18 @@ use App\Notifications\ResetPassword;
 use App\Notifications\VerifyEmail;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
+/**
+ * Class User
+ * @package App\Models
+ * @property int id
+ */
 class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 {
     use Notifiable, SpatialTrait;
@@ -94,4 +101,29 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function teams(): BelongsToMany
+    {
+        return $this->belongsToMany(Team::class)->withTimestamps();
+    }
+
+    public function ownerTeams(): BelongsToMany
+    {
+        return $this->teams()
+            ->where('owner_id', $this->id);
+    }
+
+    public function invitations(): HasMany
+    {
+        return $this->hasMany(Invitation::class, 'recipient_email', 'email');
+    }
+
+    public function isOwnerOfTeam(Team $team): bool
+    {
+        return (bool)$this->teams()
+            ->where('id', $team->id)
+            ->where('owner_id', $this->id)
+            ->count();
+    }
+
 }
