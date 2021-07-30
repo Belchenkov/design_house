@@ -86,11 +86,9 @@ class InvitationsController extends Controller
      */
     public function resend(int $id): JsonResponse
     {
-        if (! $invitation = $this->invitations->find($id)) {
-            return response()->json([
-                'message' => 'Invitation is not found!'
-            ], Response::HTTP_NOT_FOUND);
-        }
+        $invitation = $this->invitations->find($id);
+
+        $this->authorize('resend', $invitation);
 
         if (auth()->user() && ! auth()->user()->isOwnerOfTeam($invitation->team)) {
             return response()->json([
@@ -106,6 +104,51 @@ class InvitationsController extends Controller
         return response()->json([
             'message' => 'Invitation resent'
         ], Response::HTTP_OK);
+    }
+
+    public function respond(Request $request, int $id): JsonResponse
+    {
+        $this->validate($request, [
+            'token' => ['required'],
+            'decision' => ['required']
+        ]);
+
+        $token = $request->token;
+        $decision = $request->decision;
+        $invitation = $this->invitations->find($id);
+
+        $this->authorize('respond', $invitation);
+
+        // check tokens match
+        if ($invitation->token !== $token) {
+            return response()->json([
+                'message' => 'Invalid Token!'
+            ], Response::HTTP_UNAUTHORIZED);
+        }
+
+        // check if accepted
+        if ($decision !== 'deny' && auth()->user()) {
+            $this->invitations->addUserToTeam($invitation->team, auth()->id());
+        }
+
+        $invitation->delete();
+
+        return response()->json([
+            'message' => 'Successful!'
+        ], Response::HTTP_OK);
+    }
+
+    public function destroy(int $id): JsonResponse
+    {
+        $invitation = $this->invitations->find($id);
+
+        $this->authorize('delete', $invitation);
+
+        $invitation->delete();
+
+        return response()->json([
+            'message' => 'Successful!'
+        ], Response::HTTP_NO_CONTENT);
     }
 
     /**
