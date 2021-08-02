@@ -7,6 +7,7 @@ use App\Http\Resources\ChatResource;
 use App\Http\Resources\MessageResource;
 use App\Repositories\Contracts\IChat;
 use App\Repositories\Contracts\IMessage;
+use App\Repositories\Eloquent\Criteria\WithTrashed;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
@@ -56,9 +57,27 @@ class ChatController extends Controller
         return new MessageResource($message);
     }
 
+    /**
+     * @return AnonymousResourceCollection
+     */
     public function getUserChats(): AnonymousResourceCollection
     {
         $chats = $this->chats->getUserChats();
         return ChatResource::collection($chats);
     }
+
+    /**
+     * @param int $id
+     * @return AnonymousResourceCollection
+     */
+    public function getChatMessages(int $id): AnonymousResourceCollection
+    {
+        $messages = $this->messages
+            ->withCriteria([
+                new WithTrashed()
+            ])
+            ->findWhere('chat_id', $id);
+        return MessageResource::collection($messages);
+    }
 }
+

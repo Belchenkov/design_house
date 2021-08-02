@@ -10,7 +10,7 @@ use App\Repositories\Criteria\ICriteria;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Collection;
 
 abstract class BaseRepository implements IBase, ICriteria
 {
@@ -31,22 +31,22 @@ abstract class BaseRepository implements IBase, ICriteria
 
     public function find(int $id): Model
     {
-        return $this->model::findOrFail($id);
+        return $this->model->findOrFail($id);
     }
 
-    public function findWhere($column, $value): Model
+    public function findWhere($column, $value): Collection
     {
-        return $this->model::where($column, $value)->get();
+        return $this->model->where($column, $value)->get();
     }
 
     public function findWhereFirst($column, $value): Model
     {
-        return $this->model::where($column, $value)->firstOrFail();
+        return $this->model->where($column, $value)->firstOrFail();
     }
 
     public function paginate(int $per_page = 10): Collection
     {
-        return $this->model::paginate($per_page);
+        return $this->model->paginate($per_page);
     }
 
     public function create(array $data)
