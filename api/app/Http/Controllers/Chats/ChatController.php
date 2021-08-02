@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Chats;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ChatResource;
 use App\Http\Resources\MessageResource;
 use App\Repositories\Contracts\IChat;
 use App\Repositories\Contracts\IMessage;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ChatController extends Controller
 {
@@ -19,6 +21,11 @@ class ChatController extends Controller
         $this->messages = $messages;
     }
 
+    /**
+     * @param Request $request
+     * @return MessageResource
+     * @throws \Illuminate\Validation\ValidationException
+     */
     public function sendMessage(Request $request): MessageResource
     {
         $this->validate($request, [
@@ -47,5 +54,11 @@ class ChatController extends Controller
         ]);
 
         return new MessageResource($message);
+    }
+
+    public function getUserChats(): AnonymousResourceCollection
+    {
+        $chats = $this->chats->getUserChats();
+        return ChatResource::collection($chats);
     }
 }
