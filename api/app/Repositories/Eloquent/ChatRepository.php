@@ -16,4 +16,10 @@ class ChatRepository extends BaseRepository implements IChat
     {
         return Chat::class;
     }
+
+    public function createParticipants(int $chat_id, array $data): void
+    {
+        $chat = $this->find($chat_id);
+        $chat->participants()->sync($data);
+    }
 }
