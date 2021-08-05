@@ -107,6 +107,25 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         return $this->belongsToMany(Team::class)->withTimestamps();
     }
 
+    public function chats(): BelongsToMany
+    {
+        return $this->belongsToMany(Chat::class, 'participants');
+    }
+
+    public function messages(): HasMany
+    {
+        return $this->hasMany(Message::class);
+    }
+
+    public function getChatWithUser(int $user_id)
+    {
+        return $this->chats()
+            ->whereHas('participants', function($query) use ($user_id) {
+                $query->where('user_id', $user_id);
+            })
+            ->first();
+    }
+
     public function ownerTeams(): BelongsToMany
     {
         return $this->teams()
