@@ -96,5 +96,21 @@ class ChatController extends Controller
             'message' => 'Success'
         ], Response::HTTP_OK);
     }
+
+    /**
+     * @param int $id
+     * @return JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function destroyMessage(int $id): JsonResponse
+    {
+        $message = $this->messages->find($id);
+        $this->authorize('delete', $message);
+        $message->delete();
+
+        return response()->json([
+            'message' => 'Success'
+        ], Response::HTTP_NO_CONTENT);
+    }
 }
 
