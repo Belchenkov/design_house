@@ -23,7 +23,7 @@ class Chat extends Model
         return $this->hasMany(Message::class);
     }
 
-    public function getLatestMessageAttribute(): HasMany
+    public function getLatestMessageAttribute(): ?Model
     {
         return $this->messages()->latest()->first();
     }
@@ -36,6 +36,9 @@ class Chat extends Model
             ->count();
     }
 
+    /**
+     * @param int $user_id
+     */
     public function markAsReadForUser(int $user_id): void
     {
         $this->messages()

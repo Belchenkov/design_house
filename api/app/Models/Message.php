@@ -17,6 +17,23 @@ class Message extends Model
         'last_read'
     ];
 
+    /**
+     * @param $value
+     * @return string|null
+     */
+    public function getBodyAttribute($value): ?string
+    {
+        if ($this->trashed()) {
+            if (! auth()->check()) return null;
+
+            return auth()->id() === $this->sender->id
+                ? 'You deleted this message'
+                : $this->sender->name . ' deleted this message';
+        }
+
+        return $value;
+    }
+
     protected $touches = ['chat'];
 
     public function chat(): BelongsTo
