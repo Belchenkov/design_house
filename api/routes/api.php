@@ -12,10 +12,12 @@ Route::get('me', 'User\MeController@me');
 
 // Get Users
 Route::get('users', 'User\UserController@index');
+Route::get('user/{username}', 'User\UserController@findByUserName');
+Route::get('users/{id}/designs', 'Designs\DesignController@getForUser');
 
 // Get Team
 Route::get('teams/slug/{slug}', 'Teams\TeamsController@findBySlug');
-Route::get('teams/{team_id}/designs', 'Designs\DesignController@getForTeam');
+Route::get('teams/{id}/designs', 'Designs\DesignController@getForTeam');
 
 // Designs
 Route::get('designs', 'Designs\DesignController@index');

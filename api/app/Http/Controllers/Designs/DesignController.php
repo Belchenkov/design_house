@@ -149,4 +149,16 @@ class DesignController extends Controller
             ->findWhere('team_id', $team_id);
         return DesignResource::collection($designs);
     }
+
+    /**
+     * @param int $user_id
+     * @return AnonymousResourceCollection
+     */
+    public function getForUser(int $user_id): AnonymousResourceCollection
+    {
+        $designs = $this->designs
+            ->withCriteria([new IsLive()])
+            ->findWhere('user_id', $user_id);
+        return DesignResource::collection($designs);
+    }
 }
