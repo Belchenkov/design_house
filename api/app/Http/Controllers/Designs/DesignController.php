@@ -11,6 +11,7 @@ use App\Repositories\Eloquent\Criteria\IsLive;
 use App\Repositories\Eloquent\Criteria\LatestFirst;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -115,9 +116,49 @@ class DesignController extends Controller
         ]);
     }
 
-    public function search(Request $request)
+    /**
+     * @param Request $request
+     * @return AnonymousResourceCollection
+     */
+    public function search(Request $request): AnonymousResourceCollection
     {
         $designs = $this->designs->search($request);
+        return DesignResource::collection($designs);
+    }
+
+    /**
+     * @param string $slug
+     * @return DesignResource
+     */
+    public function findBySlug(string $slug): DesignResource
+    {
+        $design = $this->designs
+            ->withCriteria([new IsLive()])
+            ->findWhereFirst('slug', $slug);
+        return new DesignResource($design);
+    }
+
+    /**
+     * @param int $team_id
+     * @return AnonymousResourceCollection
+     */
+    public function getForTeam(int $team_id): AnonymousResourceCollection
+    {
+        $designs = $this->designs
+            ->withCriteria([new IsLive()])
+            ->findWhere('team_id', $team_id);
+        return DesignResource::collection($designs);
+    }
+
+    /**
+     * @param int $user_id
+     * @return AnonymousResourceCollection
+     */
+    public function getForUser(int $user_id): AnonymousResourceCollection
+    {
+        $designs = $this->designs
+            ->withCriteria([new IsLive()])
+            ->findWhere('user_id', $user_id);
         return DesignResource::collection($designs);
     }
 }
