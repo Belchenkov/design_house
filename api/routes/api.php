@@ -16,6 +16,11 @@ Route::get('users', 'User\UserController@index');
 // Get Team
 Route::get('teams/slug/{slug}', 'Teams\TeamsController@findBySlug');
 
+// Designs
+Route::get('designs', 'Designs\DesignController@index');
+Route::get('designs/{id}', 'Designs\DesignController@findDesign');
+Route::get('designs/slug/{slug}', 'Designs\DesignController@findBySlug');
+
 // Search Designs
 Route::get('search/designs', 'Designs\DesignController@search');
 Route::get('search/designers', 'User\UserController@search');
@@ -29,8 +34,6 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::put('settings/password', 'User\SettingsController@updatePassword');
 
     // Designs
-    Route::get('designs', 'Designs\DesignController@index');
-    Route::get('designs/{id}', 'Designs\DesignController@findDesign');
     Route::post('designs', 'Designs\UploadController@upload');
     Route::put('designs/{id}', 'Designs\DesignController@update');
     Route::delete('designs/{id}', 'Designs\DesignController@destroy');
