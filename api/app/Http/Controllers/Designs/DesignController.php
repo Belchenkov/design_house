@@ -137,4 +137,16 @@ class DesignController extends Controller
             ->findWhereFirst('slug', $slug);
         return new DesignResource($design);
     }
+
+    /**
+     * @param int $team_id
+     * @return AnonymousResourceCollection
+     */
+    public function getForTeam(int $team_id): AnonymousResourceCollection
+    {
+        $designs = $this->designs
+            ->withCriteria([new IsLive()])
+            ->findWhere('team_id', $team_id);
+        return DesignResource::collection($designs);
+    }
 }

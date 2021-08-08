@@ -15,6 +15,7 @@ Route::get('users', 'User\UserController@index');
 
 // Get Team
 Route::get('teams/slug/{slug}', 'Teams\TeamsController@findBySlug');
+Route::get('teams/{team_id}/designs', 'Designs\DesignController@getForTeam');
 
 // Designs
 Route::get('designs', 'Designs\DesignController@index');
