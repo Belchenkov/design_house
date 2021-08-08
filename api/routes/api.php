@@ -10,12 +10,14 @@ Route::get('/', function() {
 });
 Route::get('me', 'User\MeController@me');
 
-
 // Get Users
 Route::get('users', 'User\UserController@index');
 
 // Get Team
 Route::get('teams/slug/{slug}', 'Teams\TeamsController@findBySlug');
+
+// Search Designs
+Route::get('search/designs', 'Designs\DesignController@search');
 
 // Routes for auth users
 Route::group(['middleware' => ['auth:api']], function () {
