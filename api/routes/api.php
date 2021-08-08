@@ -18,6 +18,7 @@ Route::get('teams/slug/{slug}', 'Teams\TeamsController@findBySlug');
 
 // Search Designs
 Route::get('search/designs', 'Designs\DesignController@search');
+Route::get('search/designers', 'User\UserController@search');
 
 // Routes for auth users
 Route::group(['middleware' => ['auth:api']], function () {
