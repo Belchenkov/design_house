@@ -54,7 +54,10 @@ class UserRepository extends BaseRepository implements IUser
             $query->distanceSphereExcludingSelf('location', $point, $dist);
         }
 
-        if ($request->has('orderByLatest')) {
+
+        if ($request->orderBy === 'closest') {
+            $query->orderByDistanceSphere('location', $point, 'asc');
+        } else if ($request->has('orderByLatest')) {
             $query->latest();
         } else {
             $query->oldest();
