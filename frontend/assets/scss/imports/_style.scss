@@ -82,8 +82,8 @@ video {
     margin: 0;
     padding: 0;
     border: 0;
-    font-size: 100%;
     font: inherit;
+    font-size: 100%;
     vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -144,7 +144,7 @@ img {
 
 /* Main Css */
 body {
-    font-family: "Poppins", sans-serif !important;
+    font-family: 'Atkinson Hyperlegible', sans-serif !important;
     color: #515365;
     height: 100%;
     width: 100%;
@@ -1478,22 +1478,22 @@ footer p {
 
 /****** TYPOGRAPHY **********/
 body {
-    background-color: #edf2f6; 
+    background-color: #edf2f6;
 }
 header {
-    background-color: #333333; 
+    background-color: #333333;
 }
 footer {
-    background-color: #333333; 
+    background-color: #333333;
 }
 .text-blue {
     color: #6393d2;
 }
 .primary-bg-color {
-    background-color: #38a9ff; 
+    background-color: #38a9ff;
 }
 .secondary-bg-color {
-    background-color: #3f4257; 
+    background-color: #3f4257;
 }
 .white-bg-color {
     background-color: #ffffff !important;
@@ -1694,7 +1694,7 @@ footer {
 /******** MEDIA QUERIES *************/
 
 @media (min-width: 1200px) {
-  
+
 }
 
 @media (max-width: 1199px) {
@@ -1706,7 +1706,7 @@ footer {
     flex: 0 0 25%;
     max-width: 25%;
   }
-  .user-account-setting .list-group { 
+  .user-account-setting .list-group {
     width: 210px;
   }
 }
@@ -1727,7 +1727,7 @@ footer {
     height: auto;
   }
   .navbar-brand {
-    position: relative; 
+    position: relative;
     left: 8%;
   }
   .navbar-toggler {
@@ -1753,7 +1753,7 @@ footer {
   .upload-shot {
     margin: 15px 0 8px 0;
   }
-  .header-search, 
+  .header-search,
   .upload-shot a {
     width: 100%;
   }
@@ -1803,7 +1803,7 @@ footer {
   .designer-profile.filters-block li {
     width: 100%;
   }
-  .designer-profile.filters-block .dropdown-menu { 
+  .designer-profile.filters-block .dropdown-menu {
     box-shadow: 0 0 34px 0 rgba(63,66,87,.1);
   }
   .designer-profile-sidebar {
@@ -1815,7 +1815,7 @@ footer {
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
-  
+
 }
 
 @media (max-width: 767px) {
@@ -1852,7 +1852,7 @@ footer {
   }
   .wrapper {
     padding-bottom: 105px;
-  } 
+  }
   .hero h1 {
     font-size: 20px;
   }
