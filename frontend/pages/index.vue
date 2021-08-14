@@ -1,5 +1,7 @@
 <template>
-  <i class="fas fa-user"></i>
+  <div>
+    {{ $auth.user }}
+  </div>
 </template>
 
 <script>
