@@ -1,13 +1,13 @@
 <template>
   <header class="fixed-topx">
     <nav class="navbar navbar-expand-lg navbar-dark align-items-center bg-info">
-      <a
+      <nuxt-link
+        :to="{name: 'home'}"
         class="navbar-brand text-uppercase fw-500"
-        href="#"
         title="Project Name"
       >
-        <img src="https://img.icons8.com/emoji/48/000000/house-with-garden.png" alt="Logo"/>
-      </a>
+        <i class="fas fa-house-user"></i> Design House
+      </nuxt-link>
       <button
         class="navbar-toggler mr-auto"
         type="button"
@@ -22,11 +22,17 @@
       <div class="collapse navbar-collapse" id="navbar">
         <ul class="navbar-nav font-14 fw-300">
           <li class="nav-item active">
-            <a class="nav-link" href="#" title="Shots">Designs</a>
+            <a class="nav-link" href="#" title="Shots">
+              <i class="fas fa-palette"></i>
+              Designs
+            </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#" title="Designers"
-            > Designers </a
+            >
+              <i class="fas fa-users"></i>
+              Designers
+            </a
             >
           </li>
         </ul>
@@ -56,12 +62,18 @@
       </div>
 
       <!-- Before Login -->
-      <ul class="before-login font-14 fw-300 text-uppercase d-none">
+      <ul class="before-login font-14 fw-300 text-uppercase">
         <li>
-          <a href="#">Sign up</a>
+          <nuxt-link :to="{name: 'register'}">
+            <i class="fa fa-lock"></i>
+            Sign Up
+          </nuxt-link>
         </li>
         <li>
-          <a href="#">Sign in</a>
+          <nuxt-link :to="{name: 'login'}">
+            <i class="fas fa-key"></i>
+            Sign In
+          </nuxt-link>
         </li>
       </ul>
       <!-- End Before Login -->
@@ -119,7 +131,7 @@
             </a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#" title="Sign Out">
-              <i class="fa fa-lock"></i>
+              <i class="fas fa-sign-out-alt"></i>
               Sign Out
             </a>
           </div>

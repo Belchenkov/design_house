@@ -82,8 +82,8 @@ video {
     margin: 0;
     padding: 0;
     border: 0;
-    font: inherit;
     font-size: 100%;
+    font: inherit;
     vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -144,7 +144,7 @@ img {
 
 /* Main Css */
 body {
-    font-family: 'Atkinson Hyperlegible', sans-serif !important;
+    font-family: 'Atkinson Hyperlegible', sans-serif!important;
     color: #515365;
     height: 100%;
     width: 100%;
@@ -176,7 +176,7 @@ header .navbar-nav {
     transform: translateY(-50%);
 }
 .search-icon svg {
-    widows: 18px;
+    width: 18px;
     height: 18px;
 }
 .header-search .form-control::-webkit-input-placeholder {
