@@ -5,7 +5,7 @@
         Reset Password
       </h1>
       <form class="auth-form" @submit.prevent="submit">
-        <alert-success :form="form">{{ status }}</alert-success>
+        <alert-success :form="form" class="text-center">{{ status }}</alert-success>
         <div class="form-group">
           <input
             v-model.trim="form.email"
