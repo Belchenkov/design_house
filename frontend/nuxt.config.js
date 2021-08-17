@@ -50,7 +50,6 @@ export default {
     '@nuxtjs/auth',
     '@nuxtjs/axios',
     '@nuxtjs/dotenv',
-    '@nuxtjs/axios',
   ],
   // https://auth.nuxtjs.org/schemes/local
   auth: {
