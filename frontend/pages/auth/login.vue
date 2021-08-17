@@ -73,17 +73,17 @@ export default {
     };
   },
   methods: {
-    async submit() {
-      try {
-        const res = await this.$auth.loginWith('local', {
-          data: this.form,
+    submit() {
+      this.$auth
+        .loginWith('local', {
+          data: this.form
+        })
+        .then(res => {
+          console.log(res);
+        })
+        .catch(e => {
+          this.form.errors.set(e.response.data.errors);
         });
-        console.log(res);
-        this.form.reset();
-      } catch (err) {
-        console.error(err);
-        this.form.errors.set(err.response.data.errors);
-      }
     }
   }
 }
