@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
 use App\Repositories\Contracts\IUser;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;

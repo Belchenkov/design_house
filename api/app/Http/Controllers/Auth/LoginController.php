@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
@@ -14,6 +16,11 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
+        $this->validate($request, [
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'password' => ['required', 'string'],
+        ]);
+
         $token = $this->guard()->attempt($this->credentials($request));
 
         if (!  $token) {
@@ -71,7 +78,7 @@ class LoginController extends Controller
                 "errors" => [
                     "verification" => "You need to verify your email account!"
                 ]
-            ], 401);
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         throw ValidationException::withMessages([

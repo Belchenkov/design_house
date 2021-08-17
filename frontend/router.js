@@ -26,6 +26,11 @@ const routes = [
     path: '/verification/verify/:id',
     name: 'verify',
     component: page('auth/verification/verify.vue')
+  },
+  {
+    path: '/verification/resend',
+    name: 'verification.resend',
+    component: page('auth/verification/resend.vue')
   }
 ];
 
