@@ -5,6 +5,9 @@
         Register
       </h1>
       <form class="auth-form" @submit.prevent="submit">
+        <alert-success class="text-center" :form="form">
+          We have sent you an email to activate your account.
+        </alert-success>
         <div class="form-group">
           <input
             v-model.trim="form.name"
@@ -75,7 +78,7 @@
         </div>
         <p class="font-14 fw-400 text-center mt-4">
           Already have an account?
-          <a class="color-blue" href="#"> Login</a>
+          <nuxt-link :to="{ name: 'login' }" class="color-blue"> Login</nuxt-link>
         </p>
       </form>
     </div>
@@ -99,8 +102,8 @@ export default {
   methods: {
     async submit() {
       try {
-        const res = await this.form.post(`/register`);
-        console.log(res);
+        await this.form.post(`/register`);
+        this.form.reset();
       } catch (err) {
         console.error(err);
       }
