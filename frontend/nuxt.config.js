@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 export default {
   mode: 'universal',
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -29,7 +31,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: '~/plugins/vform', mode: 'client' }
+    '~plugins/vform',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -45,30 +47,21 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     'bootstrap-vue/nuxt',
+    '@nuxtjs/auth',
     '@nuxtjs/axios',
     '@nuxtjs/dotenv',
-    '@nuxtjs/axios',
-    '@nuxtjs/auth-next',
   ],
   // https://auth.nuxtjs.org/schemes/local
   auth: {
     strategies: {
       local: {
-        token: {
-          property: 'token',
-          global: true,
-          // required: true,
-          // type: 'Bearer'
-        },
-        user: {
-          property: 'user',
-          // autoFetch: true
-        },
         endpoints: {
           login: { url: '/login', method: 'post', propertyName: 'token' },
           logout: { url: '/logout', method: 'post' },
           user: { url: '/me', method: 'get', propertyName: 'data' }
         }
+        // tokenRequired: true,
+        // tokenType: 'bearer'
       }
     }
   },

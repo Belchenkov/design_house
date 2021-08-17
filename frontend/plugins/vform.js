@@ -1,10 +1,5 @@
 import Vue from 'vue';
-import Form from "vform";
-import {
-  HasError,
-  AlertError,
-  AlertSuccess
-} from 'vform/src/components/bootstrap4';
+import { Form, HasError, AlertError, AlertSuccess } from 'vform';
 
 Vue.component(HasError.name, HasError);
 Vue.component(AlertSuccess.name, AlertSuccess);

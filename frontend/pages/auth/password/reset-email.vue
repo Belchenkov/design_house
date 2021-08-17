@@ -2,19 +2,10 @@
   <section class="authentication">
     <div class="auth-body">
       <h1 class="text-uppercase fw-500 mb-4 text-center font-22">
-        Login
+        Reset Password
       </h1>
       <form class="auth-form" @submit.prevent="submit">
-        <alert-error
-          class="text-center"
-          :form="form"
-          v-if="form.errors.has('verification')"
-        >
-          {{ form.errors.get('verification') }}
-          <nuxt-link :to="{ name: 'verification.resend' }">
-            Resend verification email
-          </nuxt-link>
-        </alert-error>
+        <alert-success :form="form" class="text-center">{{ status }}</alert-success>
         <div class="form-group">
           <input
             v-model.trim="form.email"
@@ -26,20 +17,7 @@
           />
           <has-error :form="form" field="email" />
         </div>
-        <div class="form-group">
-          <input
-            v-model.trim="form.password"
-            type="password"
-            name="password"
-            class="form-control form-control-lg font-14 fw-300"
-            :class="{ 'is-invalid': form.errors.has('password') }"
-            placeholder="Password"
-          />
-          <has-error :form="form" field="password" />
-        </div>
-        <div class="mt-4 mb-4 clearfix">
-          <a class="forgot-pass color-blue font-14 fw-400" href="#"> Forgot password? </a>
-        </div>
+
         <div class="text-right">
           <button
             :disabled="form.busy"
@@ -49,12 +27,13 @@
             <span v-if="form.busy">
               <i class="fas fa-spinner fa-spin"></i>
             </span>
-            Login
+            Send Reset Link
           </button>
         </div>
         <p class="font-14 fw-400 text-center mt-4">
-          Don't have an account yet?
-          <nuxt-link :to="{ name: 'register' }" class="color-blue"> Create an account</nuxt-link>
+          <nuxt-link :to="{ name: 'login' }" class="color-blue">
+            Back to login
+          </nuxt-link>
         </p>
       </form>
     </div>
@@ -63,26 +42,25 @@
 
 <script>
 export default {
-  name: "login",
+  name: "reset-email",
   data() {
     return {
+      status: '',
       form: this.$vform({
-        email: '',
-        password: '',
+        email: ''
       })
     };
   },
   methods: {
     submit() {
-      this.$auth
-        .loginWith('local', {
-          data: this.form
-        })
+      this.form
+        .post('/password/email')
         .then(res => {
-          console.log(res);
+          this.status = res.data.status;
+          this.form.reset();
         })
         .catch(e => {
-          this.form.errors.set(e.response.data.errors);
+          console.log(e);
         });
     }
   }

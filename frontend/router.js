@@ -21,6 +21,26 @@ const routes = [
     path: '/register',
     name: 'register',
     component: page('auth/register.vue')
+  },
+  {
+    path: '/verification/verify/:id',
+    name: 'verify',
+    component: page('auth/verification/verify.vue')
+  },
+  {
+    path: '/verification/resend',
+    name: 'verification.resend',
+    component: page('auth/verification/resend.vue')
+  },
+  {
+    path: '/password/email',
+    name: 'password.email',
+    component: page('auth/password/reset-email.vue')
+  },
+  {
+    path: '/password/reset/:token',
+    name: 'password.reset',
+    component: page('auth/password/password-reset.vue')
   }
 ];
 
