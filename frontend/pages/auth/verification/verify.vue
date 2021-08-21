@@ -23,6 +23,7 @@
 
 <script>
 export default {
+  middleware: ['guest'],
   name: "verify",
   async asyncData({ params, query, app }) {
     const q = await Object.keys(query)
