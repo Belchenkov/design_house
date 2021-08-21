@@ -16,34 +16,27 @@
           </nuxt-link>
         </alert-error>
         <div class="form-group">
-          <input
-            v-model.trim="form.email"
-            type="text"
-            name="email"
-            class="form-control form-control-lg font-14 fw-300"
-            :class="{ 'is-invalid': form.errors.has('email') }"
+          <base-input
+            :form="form"
+            field="email"
+            v-model="form.email"
             placeholder="Email"
-          />
-          <has-error :form="form" field="email" />
+          ></base-input>
         </div>
         <div class="form-group">
-          <input
-            v-model.trim="form.password"
-            type="password"
-            name="password"
-            class="form-control form-control-lg font-14 fw-300"
-            :class="{ 'is-invalid': form.errors.has('password') }"
+          <base-input
+            :form="form"
+            field="password"
+            inputType="password"
+            v-model="form.password"
             placeholder="Password"
-          />
-          <has-error :form="form" field="password" />
+          ></base-input>
         </div>
         <div class="mt-4 mb-4 clearfix">
           <a class="forgot-pass color-blue font-14 fw-400" href="#"> Forgot password? </a>
         </div>
         <div class="text-right">
-          <base-button
-            :loading="form.busy"
-          >
+          <base-button :loading="form.busy">
             Login
           </base-button>
         </div>
@@ -58,11 +51,13 @@
 
 <script>
 import BaseButton from '../../components/buttons/BaseButton.vue';
+import BaseInput from '../../components/inputs/BaseInput.vue';
 
 export default {
   name: "login",
   components: {
-    BaseButton
+    BaseButton,
+    BaseInput,
   },
   data() {
     return {
