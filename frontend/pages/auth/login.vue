@@ -41,16 +41,11 @@
           <a class="forgot-pass color-blue font-14 fw-400" href="#"> Forgot password? </a>
         </div>
         <div class="text-right">
-          <button
-            :disabled="form.busy"
-            type="submit"
-            class="btn btn-primary primary-bg-color font-16 fw-500 text-uppercase"
+          <base-button
+            :loading="form.busy"
           >
-            <span v-if="form.busy">
-              <i class="fas fa-spinner fa-spin"></i>
-            </span>
             Login
-          </button>
+          </base-button>
         </div>
         <p class="font-14 fw-400 text-center mt-4">
           Don't have an account yet?
@@ -62,8 +57,13 @@
 </template>
 
 <script>
+import BaseButton from '../../components/buttons/BaseButton.vue';
+
 export default {
   name: "login",
+  components: {
+    BaseButton
+  },
   data() {
     return {
       form: this.$vform({
