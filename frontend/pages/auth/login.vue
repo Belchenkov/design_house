@@ -54,6 +54,7 @@ import BaseButton from '../../components/buttons/BaseButton.vue';
 import BaseInput from '../../components/inputs/BaseInput.vue';
 
 export default {
+  middleware: ['guest'],
   name: "login",
   components: {
     BaseButton,
