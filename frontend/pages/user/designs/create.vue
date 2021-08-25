@@ -63,10 +63,10 @@ export default {
     }
   },
   methods: {
-    slimService(formdata, progress, success, failure, slim) {
+    slimService(formData, progress, success, failure, slim) {
       this.uploading = true;
       this.$axios
-        .post('/designs', formdata)
+        .post('/designs', formData)
         .then(res => {
           this.$router.push({
             name: 'designs.edit',

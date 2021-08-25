@@ -17,6 +17,7 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
-    "object-shorthand": false
+    "object-shorthand": 0,
+    "no-prototype-builtins": 0,
   }
 }
