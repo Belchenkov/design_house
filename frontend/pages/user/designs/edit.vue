@@ -147,7 +147,7 @@ export default {
   },
   async asyncData({ $axios, params, error, redirect }) {
     try {
-      const design = await $axios.$get(`/designs/${params.id}`);
+      const design = await $axios.$get(`/designs/${params.id}/byUser`);
       const teams = await $axios.$get(`/users/teams`);
       return { design: design.data, teams: teams.data };
     } catch (err) {
