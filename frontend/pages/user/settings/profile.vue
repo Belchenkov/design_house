@@ -25,12 +25,12 @@
               ></base-input>
             </div>
 
-<!--            <div class="form-group">-->
-<!--              <base-gmap -->
-<!--                :initialValue="form.formatted_address" -->
-<!--                @address-response="handleAddress"-->
-<!--              ></base-gmap>-->
-<!--            </div>-->
+            <div class="form-group">
+              <base-gmap
+                :initialValue="form.formatted_address"
+                @address-response="handleAddress"
+              ></base-gmap>
+            </div>
 
             <div class="form-group">
               <base-textarea
@@ -67,6 +67,7 @@
 
 <script>
 import BaseButton from '@/components/buttons/BaseButton.vue';
+import BaseGmap from '@/components/inputs/BaseGmap.vue';
 import BaseInput from '@/components/inputs/BaseInput.vue';
 import BaseTextarea from '@/components/inputs/BaseTextarea.vue';
 
@@ -75,6 +76,7 @@ export default {
     BaseButton,
     BaseInput,
     BaseTextarea,
+    BaseGmap,
   },
   data() {
     return {
