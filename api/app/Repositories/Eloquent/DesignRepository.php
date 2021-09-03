@@ -88,6 +88,8 @@ class DesignRepository extends BaseRepository implements IDesign
             $query->latest();
         }
 
+        $query->with('user');
+
         return $query->get();
     }
 }

@@ -75,7 +75,7 @@
     <section class="cards-block">
       <div class="container">
         <div class="row">
-<!--          <base-design v-for="design in designs" :key="design.id" :design="design"></base-design>-->
+          <base-design v-for="design in designs" :key="design.id" :design="design"></base-design>
         </div>
       </div>
     </section>
@@ -83,8 +83,13 @@
 </template>
 
 <script>
+import BaseDesign from "../../components/card/BaseDesign";
+
 export default {
   name: "search",
+  components: {
+    BaseDesign
+  },
   data() {
     return {
       designs: [],
