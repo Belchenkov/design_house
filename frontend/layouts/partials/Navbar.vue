@@ -21,11 +21,11 @@
       </button>
       <div class="collapse navbar-collapse" id="navbar">
         <ul class="navbar-nav font-14 fw-300">
-          <li class="nav-item active">
-            <a class="nav-link" href="#" title="Shots">
+          <li class="nav-item">
+            <nuxt-link :to="{ name: 'designs.search' }" class="nav-link">
               <i class="fas fa-palette"></i>
               Designs
-            </a>
+            </nuxt-link>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#" title="Designers"
