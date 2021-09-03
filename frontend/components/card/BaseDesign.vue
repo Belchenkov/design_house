@@ -3,7 +3,7 @@
     <div
       class="bg-white rounded shadow-sm overflow-hidden flex-1 flex flex-col p-1"
     >
-      <a :href="`/design/${design.slug}`">
+      <a :href="`/designs/${design.slug}`">
         <div
           class="bg-cover h-48"
           :style="`background-image: url('${design.images.thumbnail}');`"

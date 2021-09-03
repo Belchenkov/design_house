@@ -63,6 +63,11 @@ const routes = [
     component: page('designs/search.vue')
   },
   {
+    path: '/designs/:slug',
+    name: 'designs.show',
+    component: page('designs/show.vue')
+  },
+  {
     path: '/settings',
     component: page('user/settings/index.vue'),
     children: [
